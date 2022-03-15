@@ -1,0 +1,97 @@
+netcat -C httpbin.org 80
+GET /anything HTTP/1.1
+Host: httpbin.org
+
+HTTP/1.1 200 OK
+Date: Tue, 15 Mar 2022 14:40:04 GMT
+Content-Type: application/json
+Content-Length: 286
+Connection: keep-alive
+Server: gunicorn/19.9.0
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {},
+  "data": "",
+  "files": {},
+  "form": {},
+  "headers": {
+    "Host": "httpbin.org",
+    "X-Amzn-Trace-Id": "Root=1-6230a544-495093894d27e08b44079a28"
+  },
+  "json": null,
+  "method": "GET",
+  "origin": "95.105.124.75",
+  "url": "http://httpbin.org/anything"
+}
+
+
+user@Laptop:~$ netcat -C httpbin.org 80
+GET /anything?type=green HTTP/1.1
+Host: httpbin.org
+
+^C
+user@Laptop:~$ netcat -C httpbin.org 80
+GET /anything?lang=en HTTP/1.1
+HOST: httpbin.org
+
+HTTP/1.1 200 OK
+Date: Tue, 15 Mar 2022 14:47:14 GMT
+Content-Type: application/json
+Content-Length: 314
+Connection: keep-alive
+Server: gunicorn/19.9.0
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {
+    "lang": "en"
+  },
+  "data": "",
+  "files": {},
+  "form": {},
+  "headers": {
+    "Host": "httpbin.org",
+    "X-Amzn-Trace-Id": "Root=1-6230a6f2-5ab25d724f9e43f517528757"
+  },
+  "json": null,
+  "method": "GET",
+  "origin": "95.105.124.75",
+  "url": "http://httpbin.org/anything?lang=en"
+}
+
+netcat -C httpbin.org 80
+POST /anything?lang=ru HTTP/1.1
+Host: httpbin.org
+Content-Length: 2
+
+
+
+HTTP/1.1 200 OK
+Date: Tue, 15 Mar 2022 14:55:32 GMT
+Content-Type: application/json
+Content-Length: 347
+Connection: keep-alive
+Server: gunicorn/19.9.0
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {
+    "lang": "ru"
+  },
+  "data": "\r\n",
+  "files": {},
+  "form": {},
+  "headers": {
+    "Content-Length": "2",
+    "Host": "httpbin.org",
+    "X-Amzn-Trace-Id": "Root=1-6230a8e4-5fee5cd17712b74f525998ea"
+  },
+  "json": null,
+  "method": "POST",
+  "origin": "95.105.124.75",
+  "url": "http://httpbin.org/anything?lang=ru"
+}
